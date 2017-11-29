@@ -5,6 +5,9 @@
 	<string>UIStatusBarStyleLightContent</string>
 
 2.設定NavigationPageRender並在其ViewDidLoad() 裡面加入UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent,true);
+LightContent為白色文字 Default為黑色文字
+
+
 [assembly: ExportRenderer(typeof(NavigationPage), typeof(EnhancedNavigationPageRenderer))]
 namespace Toolbox.Controls.iOS
 {
