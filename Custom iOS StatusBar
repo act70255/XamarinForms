@@ -1,0 +1,40 @@
+1.在Info.plist中加入
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+
+2.設定NavigationPageRender並在其ViewDidLoad() 裡面加入UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent,true);
+[assembly: ExportRenderer(typeof(NavigationPage), typeof(EnhancedNavigationPageRenderer))]
+namespace Toolbox.Controls.iOS
+{
+    public class EnhancedNavigationPageRenderer : NavigationRenderer
+    {
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            NavigationBar.TintColor = UIColor.White;
+            NavigationBar.BarTintColor = UIColor.Gray;
+            NavigationBar.BarStyle = UIBarStyle.Black;
+            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White });
+            UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent,true);
+        }
+
+        public override UIStatusBarStyle PreferredStatusBarStyle()
+        {
+            return UIStatusBarStyle.LightContent;
+        }
+    }
+}
+3.在AppDelegate的FinishedLaunching裡面設定statusBar背景顏色 加在LoadApplication後面
+
+            LoadApplication(new App(new iOSInitializer()));
+
+            UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent,true);
+
+            UIView statusBar = UIApplication.SharedApplication.ValueForKey(new NSString("statusBar")) as UIView;
+            if (statusBar.RespondsToSelector(new ObjCRuntime.Selector("setBackgroundColor:")))
+            {
+                statusBar.BackgroundColor = UIColor.FromRGB(red: (nfloat)0.2, green: (nfloat)0.2, blue: (nfloat)0.2);
+            }
