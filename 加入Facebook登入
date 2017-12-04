@@ -1,0 +1,3 @@
+https://github.com/mikeapple/XamarinFormsNativeFBLogin/
+
+其中ios  App.PostSuccessFacebookAction(result.Token.ToString()); 改成 App.PostSuccessFacebookAction(result.Token.TokenString);
