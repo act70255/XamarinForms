@@ -1,1 +1,32 @@
 https://github.com/CrossGeeks/PushNotificationPlugin
+
+Android改成
+
+public override void OnCreate() {
+            base.OnCreate();
+            RegisterActivityLifecycleCallbacks(this);
+            //A great place to initialize Xamarin.Insights and Dependency Services!
+
+            var options = new FirebaseOptions.Builder()
+                .SetApplicationId("N:1234567890:android:fffffff6ffffff5")
+                .SetApiKey("AaAaAaAaaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAa")
+                .SetDatabaseUrl("https://jamesLin-c8763.firebaseio.com")
+                .SetGcmSenderId("1234567890").Build();
+            try {
+                var firebaseApp = FirebaseApp.InitializeApp(this, options);
+            } catch (Exception e) {
+            }
+
+#if DEBUG
+            PushNotificationManager.Initialize(this, true);
+#else
+            PushNotificationManager.Initialize(this,false);
+#endif
+            //Set the activity type that will handle your notifications
+            PushNotificationManager.NotificationActivityType = typeof(MainActivity);
+
+            //Handle notification when app is closed here
+            CrossPushNotification.Current.OnNotificationReceived += (s, p) => {
+
+            };
+        }
