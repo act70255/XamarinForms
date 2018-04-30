@@ -1,0 +1,7 @@
+I solve that by changing the default editor in visual studio :
+
+	1.In Visual : File > Open
+	2.In the open file box : Select a .xaml file (don't open it)
+	3.Select "Open with" in the button arrow
+	4.Select "Source Code (Text) Editor and Set as Default
+	5.Click OK
